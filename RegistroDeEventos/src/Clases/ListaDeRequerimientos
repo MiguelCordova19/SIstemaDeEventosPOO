@@ -1,0 +1,58 @@
+Requerimientos Funcionales para Usuarios:
+-Registro e inicio de sesión de usuarios con nombre, correo y clave
+-Búsqueda de eventos disponibles en la plataforma
+-Selección de asientos para un evento específico
+-Realización de pagos para los eventos seleccionados
+-Visualización de eventos disponibles
+-Logout del sistema
+
+Requerimientos Funcionales para Administradores:
+-Gestión completa de eventos (crear, modificar, eliminar)
+-Gestión de precios de eventos
+-Administración de usuarios del sistema
+-Control de aforo y asientos disponibles
+-Gestión de la plataforma general
+
+Requerimientos para Eventos:
+-Registro de nombre del evento
+-Descripción detallada
+-Gestión de precios
+-Control de asientos disponibles
+-Sistema de numeración de asientos
+-Estado de ocupación de asientos
+
+Requerimientos para Sistema de Pago:
+-Procesamiento de diferentes formatos de pago
+-Registro del monto de la transacción
+-Validación de pagos
+-Generación de comprobantes de pago
+
+Requerimientos Técnicos:
+-Desarrollo en Java con NetBeans IDE
+-Implementación de base de datos para almacenamiento
+-Interfaz gráfica de usuario (GUI) intuitiva
+-Sistema de autenticación seguro
+-Validaciones de datos en todos los formularios
+
+Requerimientos de Seguridad:
+-Encriptación de contraseñas
+-Control de acceso basado en roles (Usuario/Administrador)
+-Sesiones seguras
+-Validación de datos de entrada
+-Protección de información sensible
+
+Requerimientos de Interfaz:
+-Pantalla de login/registro
+-Dashboard para usuarios y administradores
+-Formularios para gestión de eventos
+-Visualización de asientos disponibles
+-Interfaz de pago
+-Menús de navegación intuitivos
+
+Requerimientos de Base de Datos:
+-Tabla de usuarios
+-Tabla de eventos
+-Tabla de asientos
+-Tabla de pagos
+-Registro de transacciones
+-Historial de eventos
