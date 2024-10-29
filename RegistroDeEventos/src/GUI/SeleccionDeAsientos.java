@@ -43,7 +43,7 @@ public class SeleccionDeAsientos extends javax.swing.JFrame {
         jCheckBox13 = new javax.swing.JCheckBox();
         jCheckBox14 = new javax.swing.JCheckBox();
         jCheckBox15 = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
+        btnConfirmarAsientos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,7 +80,12 @@ public class SeleccionDeAsientos extends javax.swing.JFrame {
 
         jCheckBox15.setText("Asiento 15");
 
-        jButton1.setText("Confirmar Asientos Seleccionados");
+        btnConfirmarAsientos.setText("Confirmar Asientos Seleccionados");
+        btnConfirmarAsientos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarAsientosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -119,7 +124,7 @@ public class SeleccionDeAsientos extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(105, 105, 105)
-                        .addComponent(jButton1)))
+                        .addComponent(btnConfirmarAsientos)))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -153,7 +158,7 @@ public class SeleccionDeAsientos extends javax.swing.JFrame {
                     .addComponent(jCheckBox10)
                     .addComponent(jCheckBox15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnConfirmarAsientos)
                 .addGap(28, 28, 28))
         );
 
@@ -176,6 +181,12 @@ public class SeleccionDeAsientos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnConfirmarAsientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarAsientosActionPerformed
+        SistemaPago pf = new SistemaPago();
+        pf.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnConfirmarAsientosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,7 +224,7 @@ public class SeleccionDeAsientos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnConfirmarAsientos;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;
     private javax.swing.JCheckBox jCheckBox11;
