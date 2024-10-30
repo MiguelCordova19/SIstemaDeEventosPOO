@@ -20,6 +20,10 @@ public class Evento {
     public String getNombre(){
         return nombre;
     }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
     
     public void setPrecio(double precio){
         this.precio = precio;

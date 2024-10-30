@@ -4,10 +4,11 @@ package Clases;
 public class Asiento {
     private String numero;
     private boolean ocupado;
+    private boolean desocupar;
     
-    public Asiento(String numero){
+    public Asiento(String numero, boolean ocupado){
         this.numero = numero;
-        this.ocupado = false;
+        this.ocupado = ocupado;
     }
     
     public String getNumero(){
@@ -16,6 +17,19 @@ public class Asiento {
     
     public boolean isOcupado(){
         return ocupado;
+    }
+    
+        public boolean isDesocupado() {
+        return !ocupado;
+    }
+    
+    public void desocupar() {
+        if (ocupado) {
+            ocupado = false;
+            System.out.println("Asiento " + numero + " desocupado.");
+        } else {
+            System.out.println("El asiento ya estaba desocupado.");
+        }
     }
     
     public void ocupar(){
