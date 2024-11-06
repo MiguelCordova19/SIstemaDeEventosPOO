@@ -1,8 +1,13 @@
 
 package GUI;
 
+import Clases.Usuario;
 import java.awt.Color;
 import static java.awt.Color.blue;
+import java.awt.Cursor;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Login extends javax.swing.JFrame {
 
@@ -10,6 +15,7 @@ public class Login extends javax.swing.JFrame {
     
     public Login() {
         initComponents();
+        lbCrearCuenta.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
     /**
@@ -23,6 +29,8 @@ public class Login extends javax.swing.JFrame {
 
         encabezado = new javax.swing.JPanel();
         exitTxt = new javax.swing.JLabel();
+        lbCrearCuenta = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -80,6 +88,21 @@ public class Login extends javax.swing.JFrame {
 
         getContentPane().add(encabezado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 40));
 
+        lbCrearCuenta.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        lbCrearCuenta.setForeground(new java.awt.Color(255, 255, 255));
+        lbCrearCuenta.setText("Cree una aquí");
+        lbCrearCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbCrearCuentaMouseClicked(evt);
+            }
+        });
+        getContentPane().add(lbCrearCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 540, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("¿No tienes cuenta?");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 540, -1, -1));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Usuario:");
@@ -104,7 +127,7 @@ public class Login extends javax.swing.JFrame {
                 btnIniciarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 500, -1, -1));
+        getContentPane().add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 480, -1, -1));
 
         passContrasena.setForeground(new java.awt.Color(204, 204, 204));
         passContrasena.setText("*******");
@@ -188,19 +211,68 @@ public class Login extends javax.swing.JFrame {
         
     }//GEN-LAST:event_passContrasenaMousePressed
 
+    private boolean validarCredenciales(String usuario, String password) {
+            try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] datos = linea.split(",");
+                // Formato del archivo: nombre,apellido,usuario,correo,clave,genero,fechaNacimiento
+                if (datos.length >= 5 && 
+                    datos[2].trim().equals(usuario) && // Usuario está en la posición 2
+                    datos[4].trim().equals(password)) { // Contraseña está en la posición 4
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Error al leer el archivo de usuarios: " + e.getMessage(),
+                "Error",
+                javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+        }
+        return false;
+    }
+    
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-        javax.swing.JOptionPane.showMessageDialog(
-        this, 
-        "Intento de login con los datos:\nUsuario: " + txtUsuario.getText() + 
-        "\nContraseña: " + String.valueOf(passContrasena.getPassword()), 
-        "LOGIN", 
-        javax.swing.JOptionPane.INFORMATION_MESSAGE
-        );
+        String nombreUsuario = txtUsuario.getText().trim();
+        String password = String.valueOf(passContrasena.getPassword()).trim();
 
-        GestionDeEventos pf = new GestionDeEventos();
-        pf.setVisible(true);
-        this.dispose();
+        // Validar campos vacíos
+        if (nombreUsuario.isEmpty() || nombreUsuario.equals("Ingrese su nombre de usuario") ||
+            password.isEmpty() || password.equals("*******")) {
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Por favor, complete todos los campos",
+                "Error",
+                javax.swing.JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+
+        // Cargar el usuario y verificar credenciales
+        Usuario usuario = Usuario.cargarUsuario(nombreUsuario);
+        if (usuario != null && usuario.autenticar(password)) {
+            GestionDeEventos pf = new GestionDeEventos();
+            pf.setVisible(true);
+            this.dispose();
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Usuario o contraseña incorrectos",
+                "Error de acceso",
+                javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+            passContrasena.setText("*******");
+            passContrasena.setForeground(Color.gray);
+        }
     }//GEN-LAST:event_btnIniciarActionPerformed
+
+    private void lbCrearCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearCuentaMouseClicked
+        CrearCuenta crearCuenta = new CrearCuenta();
+        crearCuenta.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lbCrearCuentaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -249,6 +321,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lbCrearCuenta;
     private javax.swing.JPasswordField passContrasena;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
