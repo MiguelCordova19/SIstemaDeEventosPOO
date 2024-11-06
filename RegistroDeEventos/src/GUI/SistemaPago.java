@@ -50,7 +50,7 @@ public class SistemaPago extends javax.swing.JFrame {
 
         jLabel5.setText("Soles");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tarjeta", "Efectivo" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tarjeta", "Transferencia a Cuenta", "Cajero", "Ventanilla" }));
 
         jButton1.setText("Procesar Pago");
 

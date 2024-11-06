@@ -1,17 +1,18 @@
 
 package Clases;
 
+import GUI.SistemaPago;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Plataforma {
     private List<Evento> eventos;
-    private SistemaPago sistemaPago;
+    private FormatoPago formatoPago;
     private List<Usuario> usuarios;
     
-    public Plataforma(SistemaPago sistemaPago) {
+    public Plataforma(FormatoPago formatoPago) {
         this.eventos = new ArrayList<>();
-        this.sistemaPago = sistemaPago;
+        this.formatoPago = formatoPago;
         this.usuarios = new ArrayList<>();
     }
     
@@ -29,7 +30,4 @@ public class Plataforma {
         System.out.println("Usuarui gestionado: " + usuario.getNombre());
     }
     
-    public boolean procesarPago(Pago pago){
-        return sistemaPago.procesarPago(pago);
-    }
 }

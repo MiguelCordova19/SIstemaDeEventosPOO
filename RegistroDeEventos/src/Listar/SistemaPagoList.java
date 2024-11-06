@@ -1,22 +1,22 @@
 
 package Listar;
 
-import Clases.SistemaPago;
+import Clases.FormatoPago;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SistemaPagoList {
-    List<SistemaPago> listaSistemaPagos = new ArrayList<>();  
-  public void agregar (SistemaPago p){
+    List<FormatoPago> listaSistemaPagos = new ArrayList<>();  
+  public void agregar (FormatoPago p){
       listaSistemaPagos.add(p);
   }
-  public void quitar (SistemaPago p){
+  public void quitar (FormatoPago p){
        listaSistemaPagos.remove(p);
   }
-  public SistemaPago obtener (int pag){
+  public FormatoPago obtener (int pag){
       return  listaSistemaPagos.get(pag);
   }
-  public List <SistemaPago> listar(){
+  public List <FormatoPago> listar(){
       return this.listaSistemaPagos;
   }
 }

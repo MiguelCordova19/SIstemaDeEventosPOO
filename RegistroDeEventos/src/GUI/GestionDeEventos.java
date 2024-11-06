@@ -1,7 +1,7 @@
 package GUI;
         
 import Clases.Evento;
-import Clases.GestorEventos;
+import HashSet.EventoHashet;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.DefaultComboBoxModel;
@@ -9,12 +9,12 @@ import javax.swing.JOptionPane;
 
 
 public class GestionDeEventos extends javax.swing.JFrame {
-    private GestorEventos gestorEventos;
+    private EventoHashet gestorEventos;
     
     int xMouse, yMouse;
     public GestionDeEventos() {
         initComponents();
-        gestorEventos = new GestorEventos();
+        gestorEventos = new EventoHashet();
         cargarEventosEnComboBox();
         configurarEventos();
     }
@@ -29,17 +29,34 @@ public class GestionDeEventos extends javax.swing.JFrame {
     
     private void configurarEventos() {
         cmbEventos.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String nombreSeleccionado = (String) cmbEventos.getSelectedItem();
-                Evento eventoSeleccionado = gestorEventos.buscarEventoPorNombre(nombreSeleccionado);
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String nombreSeleccionado = (String) cmbEventos.getSelectedItem();
+            Evento eventoSeleccionado = gestorEventos.buscarEventoPorNombre(nombreSeleccionado);
+            
+            if (eventoSeleccionado != null) {
+                // Actualizar todos los campos con la información del evento
+                jTextArea1.setText(eventoSeleccionado.getDescripcion());
+                txtPrecio.setText(String.format("%.2f", eventoSeleccionado.obtenerPrecio()));
                 
-                if (eventoSeleccionado != null) {
-                    txtDescripcion.setText(eventoSeleccionado.getDescripcion());
-                    txtPrecio.setText(String.format("%.2f", eventoSeleccionado.obtenerPrecio()));
-                }
+                // Nuevos campos
+                jTextField1.setText(eventoSeleccionado.getAmbiente());
+                jTextField2.setText(String.valueOf(eventoSeleccionado.getCapacidad()));
+                jTextField3.setText(eventoSeleccionado.getFecha());
+                jTextField4.setText(eventoSeleccionado.getLugar());
+                jTextField5.setText(eventoSeleccionado.getEstado());
+                
+                // Hacer los campos de texto no editables
+                txtPrecio.setEditable(false);
+                jTextField1.setEditable(false);
+                jTextField2.setEditable(false);
+                jTextField3.setEditable(false);
+                jTextField4.setEditable(false);
+                jTextField5.setEditable(false);
+                jTextArea1.setEditable(false);
             }
-        });
+        }
+    });
     }
     
 
@@ -51,14 +68,25 @@ public class GestionDeEventos extends javax.swing.JFrame {
         BarraSuperior = new javax.swing.JPanel();
         btnSalir = new javax.swing.JLabel();
         cmbEventos = new javax.swing.JComboBox<>();
-        txtDescripcion = new javax.swing.JTextField();
         txtPrecio = new javax.swing.JTextField();
+        txtDescripcion = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         btnEscoger = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -111,9 +139,14 @@ public class GestionDeEventos extends javax.swing.JFrame {
                 cmbEventosActionPerformed(evt);
             }
         });
-        bg.add(cmbEventos, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, 420, 60));
-        bg.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 490, 60));
-        bg.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, 490, 60));
+        bg.add(cmbEventos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 530, 50));
+        bg.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 340, 80, 40));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        txtDescripcion.setViewportView(jTextArea1);
+
+        bg.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 640, -1));
 
         btnEscoger.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         btnEscoger.setText("Escoger Asientos");
@@ -122,31 +155,61 @@ public class GestionDeEventos extends javax.swing.JFrame {
                 btnEscogerActionPerformed(evt);
             }
         });
-        bg.add(btnEscoger, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 480, -1, -1));
+        bg.add(btnEscoger, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 500, -1, -1));
+        bg.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 340, 110, 40));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Ambiente:");
+        bg.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 340, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Precio del Evento:");
-        bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, -1, -1));
+        bg.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Seleccione un Evento:");
-        bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
+        bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Descripción:");
-        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
+        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Big John", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Seleccion de evento");
-        bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 460, 60));
+        jLabel2.setText("COMPRE SU ENTRADA");
+        bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 460, 60));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Items/Diseño sin título (3).png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 880, 550));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Capacidad:");
+        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 340, -1, -1));
+        bg.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 340, 110, 40));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Fecha:");
+        bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, -1, -1));
+        bg.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 420, 140, 40));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Lugar:");
+        bg.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 420, -1, -1));
+        bg.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 420, 200, 40));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Estado:");
+        bg.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 420, -1, -1));
+        bg.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 420, 190, 40));
+
+        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Items/Diseño sin título (3).png"))); // NOI18N
+        Background.setText("jLabel1");
+        bg.add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 880, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -223,6 +286,7 @@ public class GestionDeEventos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Background;
     private javax.swing.JPanel BarraSuperior;
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnEscoger;
@@ -233,7 +297,17 @@ public class GestionDeEventos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField txtDescripcion;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JScrollPane txtDescripcion;
     private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }
