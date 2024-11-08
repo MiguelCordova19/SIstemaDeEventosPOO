@@ -212,14 +212,14 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_passContrasenaMousePressed
 
     private boolean validarCredenciales(String usuario, String password) {
-            try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(",");
-                // Formato del archivo: nombre,apellido,usuario,correo,clave,genero,fechaNacimiento
-                if (datos.length >= 5 && 
-                    datos[2].trim().equals(usuario) && // Usuario está en la posición 2
-                    datos[4].trim().equals(password)) { // Contraseña está en la posición 4
+
+                if (datos.length >= 5 &&
+                    datos[2].trim().equals(usuario) && 
+                    datos[4].trim().equals(password)) { 
                     return true;
                 }
             }

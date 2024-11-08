@@ -1,6 +1,2 @@
 
-Miguel Angel,Cordova Santamaria,miguelcordova,macsyt19@gmail.com,boby1234,Masculino,19/Octubre/2002
-Juan Gabriel,Pancho Villa,juancitopancho,juancito@gmail.com,juanes123,Masculino,4/Agosto/2001
-Juana,Lopez,juanita12,juana@gmail.com,juana123,Masculino,24/Octubre/2011
-Aldair,Sandoval,aldairsandoval,U50002@gmail.com,sandoval04,Masculino,20/Abril/2004
-Brayan,Gonzales,brayangonzales,brayancito@gmail.com,brayan123,Masculino,12/Agosto/2008
+Miguel,Cordova,miguelcordova,macs@gmail.com,boby1234,Masculino,19/Octubre/2002

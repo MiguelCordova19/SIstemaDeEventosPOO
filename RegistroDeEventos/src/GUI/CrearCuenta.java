@@ -344,15 +344,13 @@ public class CrearCuenta extends javax.swing.JFrame {
             return;
         }
 
-        try {
-            // Construir fecha de nacimiento
-            String fechaNacimiento = String.format("%s/%s/%s", 
+        // Construir fecha de nacimiento
+        String fechaNacimiento = String.format("%s/%s/%s", 
                 cmdDia.getSelectedItem(),
                 cmbMes.getSelectedItem(),
                 cmbYear.getSelectedItem());
-
-            // Guardar datos en el archivo de texto
-            UsuariosCreados.saveUserData(
+        // Guardar datos en el archivo de texto
+        UsuariosCreados.saveUserData(
                 txtNombre.getText(),
                 txtApellido.getText(),
                 txtUsuario.getText(),
@@ -360,18 +358,14 @@ public class CrearCuenta extends javax.swing.JFrame {
                 String.valueOf(txtClave.getPassword()),
                 getSelectedGender(),
                 fechaNacimiento
-            );
-
-            JOptionPane.showMessageDialog(this, "¡Cuenta creada exitosamente!");
-            this.dispose();
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run(){
-                    new Login().setVisible(true);
-                }
-            });
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Error al guardar los datos: " + ex.getMessage());
-        }
+        );
+        JOptionPane.showMessageDialog(this, "¡Cuenta creada exitosamente!");
+        this.dispose();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run(){
+                new Login().setVisible(true);
+            }
+        });
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed

@@ -5,11 +5,15 @@ import BaseDeDatos.UsuariosCreados;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Usuario extends Persona{
     private String nombreUsuario;
     private String clave;
     
+    private static final Map<String, Usuario> usuarios = new HashMap<>();
+
     public Usuario(String nombre, String apellido, String nombreUsuario, 
                   String email, String clave, String genero, 
                   String fechaNacimiento) {
@@ -27,51 +31,56 @@ public class Usuario extends Persona{
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
     }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
     
-    // Método para registrar un nuevo usuario
     public boolean registrar() {
-        try {
-            if (!UsuariosCreados.isUsernameAvailable(this.nombreUsuario)) {
-                return false;
-            }
-            
-            UsuariosCreados.saveUserData(
-                this.nombre,
-                this.apellido,
-                this.nombreUsuario,
-                this.email,
-                this.clave,
-                this.genero,
-                this.fechaNacimiento
-            );
+        if (!UsuariosCreados.isUsernameAvailable(this.nombreUsuario)) {
+        return false;
+        }
+
+        boolean resultado = UsuariosCreados.saveUserData(
+            this.nombre,
+            this.apellido,
+            this.nombreUsuario,
+            this.email,
+            this.clave,
+            this.genero,
+            this.fechaNacimiento
+        );
+
+        if (resultado) {
+            usuarios.put(this.nombreUsuario, this);
             return true;
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
             return false;
         }
     }
     
-    // Implementación del método abstracto de autenticación
-    @Override
-    public boolean autenticar(String passwordIntento) {
-        try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                String[] datos = linea.split(",");
-                // Verifica si el usuario y la contraseña coinciden
-                if (datos.length >= 5 && 
-                    datos[2].trim().equals(this.nombreUsuario) && 
-                    datos[4].trim().equals(passwordIntento)) {
-                    return true;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
+     public boolean autenticar(String passwordIntento) {
+        Usuario usuario = Usuario.cargarUsuario(this.nombreUsuario);
+        return usuario != null && usuario.clave.equals(passwordIntento);
+    }
+
+    public static Usuario obtenerUsuario(String nombreUsuario) {
+        return usuarios.get(nombreUsuario);
     }
     
-    // Método estático para cargar un usuario desde el archivo
+    public static Usuario fromDataArray(String[] data) {
+        if (data.length == 7) {
+            return new Usuario(data[0], data[1], data[2], data[3], data[4], data[5], data[6]);
+        } else {
+            System.err.println("Datos insuficientes para crear Usuario");
+            return null;
+        }
+    }
+    
     public static Usuario cargarUsuario(String nombreUsuario) {
         try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
             String linea;
@@ -97,7 +106,7 @@ public class Usuario extends Persona{
     
     @Override
     public String toString() {
-        return "Usuario{" + 
+        return "Usuario{" +
                "nombre='" + nombre + '\'' +
                ", apellido='" + apellido + '\'' +
                ", nombreUsuario='" + nombreUsuario + '\'' +
