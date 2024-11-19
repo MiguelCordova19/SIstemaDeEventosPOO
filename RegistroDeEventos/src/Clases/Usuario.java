@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import BaseDeDatos.UsuarioDAO;
 
 public class Usuario extends Persona{
     private String nombreUsuario;
@@ -41,26 +42,10 @@ public class Usuario extends Persona{
     }
     
     public boolean registrar() {
-        if (!UsuariosCreados.isUsernameAvailable(this.nombreUsuario)) {
-        return false;
-        }
-
-        boolean resultado = UsuariosCreados.saveUserData(
-            this.nombre,
-            this.apellido,
-            this.nombreUsuario,
-            this.email,
-            this.clave,
-            this.genero,
-            this.fechaNacimiento
-        );
-
-        if (resultado) {
-            usuarios.put(this.nombreUsuario, this);
-            return true;
-        } else {
+        if (!UsuarioDAO.isUsernameAvailable(this.nombreUsuario)) {
             return false;
         }
+        return UsuarioDAO.guardarUsuario(this);
     }
     
      public boolean autenticar(String passwordIntento) {
@@ -82,26 +67,7 @@ public class Usuario extends Persona{
     }
     
     public static Usuario cargarUsuario(String nombreUsuario) {
-        try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                String[] datos = linea.split(",");
-                if (datos.length >= 7 && datos[2].trim().equals(nombreUsuario)) {
-                    return new Usuario(
-                        datos[0].trim(), // nombre
-                        datos[1].trim(), // apellido
-                        datos[2].trim(), // nombreUsuario
-                        datos[3].trim(), // email
-                        datos[4].trim(), // clave
-                        datos[5].trim(), // genero
-                        datos[6].trim()  // fechaNacimiento
-                    );
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return UsuarioDAO.obtenerUsuarioPorUsername(nombreUsuario);
     }
     
     @Override

@@ -1,7 +1,10 @@
 
 package GUI;
 
+import BaseDeDatos.UsuarioDAO;
 import BaseDeDatos.UsuariosCreados;
+import Clases.DateHandler;
+import Clases.Usuario;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
@@ -17,12 +20,28 @@ import javax.swing.text.PlainDocument;
 
 public class CrearCuenta extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CrearCuenta
-     */
+    private DateHandler dateHandler;
+    
     public CrearCuenta() {
-        initComponents();
-        initValidaciones();
+        try {
+            initComponents();
+            UsuarioDAO.crearTablaUsuarios();
+            initValidaciones();
+            setupDateHandler(); // Añadir esta llamada
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "Error al inicializar la ventana: " + e.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void setupDateHandler() {
+        txtNombre.setDocument(new SoloLetras());
+        txtApellido.setDocument(new SoloLetras());
+        buttonGroup1.clearSelection();
+        txtVerificado.setEditable(false);
+        txtUsuario.addFocusListener(new UsernameAvailabilityListener());
     }
 
     private void initValidaciones() {
@@ -318,7 +337,7 @@ public class CrearCuenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-            // Validar campos obligatorios
+        // Validar campos obligatorios
         if (txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty() || 
             txtUsuario.getText().isEmpty() || txtCorreo.getText().isEmpty() || 
             String.valueOf(txtClave.getPassword()).isEmpty() ||
@@ -326,7 +345,7 @@ public class CrearCuenta extends javax.swing.JFrame {
             getSelectedGender().isEmpty() ||
             cmbYear.getSelectedItem().equals("Año") ||
             cmbMes.getSelectedItem().equals("Mes") ||
-            cmdDia.getSelectedItem().equals("Día")) {
+            cmdDia.getSelectedItem() == null) {
 
             JOptionPane.showMessageDialog(this, "Por favor, llena todos los campos obligatorios.");
             return;
@@ -338,34 +357,43 @@ public class CrearCuenta extends javax.swing.JFrame {
             return;
         }
 
-        // Verificar disponibilidad de nombre de usuario
-        if (!UsuariosCreados.isUsernameAvailable(txtUsuario.getText())) {
-            JOptionPane.showMessageDialog(this, "El nombre de usuario no está disponible.");
-            return;
-        }
-
         // Construir fecha de nacimiento
         String fechaNacimiento = String.format("%s/%s/%s", 
                 cmdDia.getSelectedItem(),
                 cmbMes.getSelectedItem(),
                 cmbYear.getSelectedItem());
-        // Guardar datos en el archivo de texto
-        UsuariosCreados.saveUserData(
-                txtNombre.getText(),
-                txtApellido.getText(),
-                txtUsuario.getText(),
-                txtCorreo.getText(),
-                String.valueOf(txtClave.getPassword()),
-                getSelectedGender(),
-                fechaNacimiento
+        try {
+        // Crear nuevo objeto Usuario con los datos del formulario
+        Usuario nuevoUsuario = new Usuario(
+            txtNombre.getText(),
+            txtApellido.getText(),
+            txtUsuario.getText(),
+            txtCorreo.getText(),
+            String.valueOf(txtClave.getPassword()),
+            getSelectedGender(),
+            fechaNacimiento
         );
-        JOptionPane.showMessageDialog(this, "¡Cuenta creada exitosamente!");
-        this.dispose();
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run(){
+
+        // Intentar registrar el usuario en la base de datos
+        if (nuevoUsuario.registrar()) {
+            JOptionPane.showMessageDialog(this, "¡Cuenta creada exitosamente!");
+            this.dispose();
+            java.awt.EventQueue.invokeLater(() -> {
                 new Login().setVisible(true);
+            });
+        } else {
+            JOptionPane.showMessageDialog(this, 
+                "No se pudo crear la cuenta. El nombre de usuario podría estar en uso.",
+                "Error al crear cuenta",
+                JOptionPane.ERROR_MESSAGE);
             }
-        });
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "Error al crear la cuenta: " + e.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
