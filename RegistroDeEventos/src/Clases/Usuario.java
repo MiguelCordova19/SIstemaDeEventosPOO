@@ -8,19 +8,21 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import BaseDeDatos.UsuarioDAO;
+import java.util.List;
 
 public class Usuario extends Persona{
     private String nombreUsuario;
     private String clave;
+    private String rol;
     
     private static final Map<String, Usuario> usuarios = new HashMap<>();
 
-    public Usuario(String nombre, String apellido, String nombreUsuario, 
-                  String email, String clave, String genero, 
-                  String fechaNacimiento) {
-        super(nombre, apellido, email, genero, fechaNacimiento);
+    public Usuario(String nombre, String nombreUsuario, String email, 
+                   String genero, String clave, String rol, String fechaNacimiento) {
+        super(nombre, null, email, genero, fechaNacimiento);
         this.nombreUsuario = nombreUsuario;
         this.clave = clave;
+        this.rol = rol;
     }
     
     // Getters específicos de Usuario
@@ -41,6 +43,14 @@ public class Usuario extends Persona{
         this.clave = clave;
     }
     
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+    
     public boolean registrar() {
         if (!UsuarioDAO.isUsernameAvailable(this.nombreUsuario)) {
             return false;
@@ -49,12 +59,37 @@ public class Usuario extends Persona{
     }
     
      public boolean autenticar(String passwordIntento) {
-        Usuario usuario = Usuario.cargarUsuario(this.nombreUsuario);
-        return usuario != null && usuario.clave.equals(passwordIntento);
+        Usuario usuarioEncontrado = UsuarioDAO.obtenerUsuarioPorUsername(this.nombreUsuario);
+        return usuarioEncontrado != null && usuarioEncontrado.clave.equals(passwordIntento);
     }
+     
+    public boolean actualizar() {
+        return UsuarioDAO.actualizarUsuario(this);
+    }
+
+    // Método para eliminar usuario de la base de datos
+    public boolean eliminar() {
+        return UsuarioDAO.eliminarUsuario(this.nombreUsuario);
+    }
+
 
     public static Usuario obtenerUsuario(String nombreUsuario) {
         return usuarios.get(nombreUsuario);
+    }
+    
+    // Método estático para obtener todos los usuarios
+    public static List<Usuario> obtenerTodosLosUsuarios() {
+        return UsuarioDAO.obtenerTodosLosUsuarios();
+    }
+    
+    public static boolean existeUsuario(String nombreUsuario) {
+        return UsuarioDAO.obtenerUsuarioPorUsername(nombreUsuario) != null;
+    }
+    
+    // Método para cambiar contraseña
+    public boolean cambiarClave(String nuevaClave) {
+        this.clave = nuevaClave;
+        return actualizar();
     }
     
     public static Usuario fromDataArray(String[] data) {
@@ -70,14 +105,15 @@ public class Usuario extends Persona{
         return UsuarioDAO.obtenerUsuarioPorUsername(nombreUsuario);
     }
     
+    // Método toString mejorado
     @Override
     public String toString() {
         return "Usuario{" +
                "nombre='" + nombre + '\'' +
-               ", apellido='" + apellido + '\'' +
                ", nombreUsuario='" + nombreUsuario + '\'' +
                ", email='" + email + '\'' +
                ", genero='" + genero + '\'' +
+               ", rol='" + rol + '\'' +
                ", fechaNacimiento='" + fechaNacimiento + '\'' +
                '}';
     }

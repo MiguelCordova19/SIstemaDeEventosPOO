@@ -1,6 +1,8 @@
 
 package GUI;
 
+import BaseDeDatos.UsuarioDAO;
+import static BaseDeDatos.UsuarioDAO.eliminarUsuario;
 import BaseDeDatos.UsuariosCreados;
 import Clases.Plataforma;
 import Clases.Usuario;
@@ -17,11 +19,30 @@ public class PanelAdministrador extends javax.swing.JFrame {
     private Plataforma plataforma;
     
     public PanelAdministrador() {
-        this.plataforma = new Plataforma();
-        initComponents();
-        cargarUsuariosEnTabla();
-        llenarTablaConUsuarios();
+        try {
+            initComponents();
 
+            // Configurar el modelo de la tabla explícitamente
+            DefaultTableModel modelo = new DefaultTableModel(
+                new Object[][] {},
+                new String[] {
+                    "Nombre", "Nombre de Usuario", "Correo", "Género", "Rol"
+                }
+            ) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false; // Hacer la tabla no editable
+                }
+            };
+
+            jTable1.setModel(modelo);
+
+            // Cargar los usuarios
+            cargarUsuariosEnTabla();
+        } catch (Exception e) {
+            System.err.println("Error en constructor: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void llenarTablaConUsuarios() {
@@ -46,12 +67,50 @@ public class PanelAdministrador extends javax.swing.JFrame {
     }
     
     private void cargarUsuariosEnTabla(){
-        List<Usuario> usuarios = UsuariosCreados.obtenerUsuarios();
-        ((DefaultTableModel) jTable1.getModel()).setRowCount(0);
-        for (Usuario usuario : usuarios){
-            ((DefaultTableModel) jTable1.getModel()).addRow(new Object[]{
-                usuario.getNombre(), usuario.getNombreUsuario(), usuario.getEmail(), usuario.getGenero(), "Nivel Usuario"
-            });
+        try {
+            // Obtener usuarios desde la base de datos
+            List<Usuario> usuarios = UsuarioDAO.obtenerTodosLosUsuarios();
+
+            // Obtener el modelo de la tabla
+            DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+
+            // Limpiar la tabla
+            modelo.setRowCount(0);
+
+            // Verificar si hay usuarios
+            if (usuarios.isEmpty()) {
+                System.out.println("No se encontraron usuarios en la base de datos");
+                return;
+            }
+
+            // Llenar la tabla con los usuarios
+            for (Usuario usuario : usuarios) {
+                try {
+                    modelo.addRow(new Object[]{
+                        usuario.getNombre(),
+                        usuario.getNombreUsuario(),
+                        usuario.getEmail(),
+                        usuario.getGenero(),
+                        "Usuario" // Rol por defecto
+                    });
+                } catch (Exception e) {
+                    System.err.println("Error al agregar fila: " + e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error general al cargar usuarios: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    private void asignarRol(int idUsuario, int idRol) {
+        if (UsuarioDAO.asignarRolAUsuario(idUsuario, idRol)) {
+            // Actualizar la tabla de usuarios para reflejar el cambio de rol
+            cargarUsuariosEnTabla();
+            JOptionPane.showMessageDialog(this, "Rol asignado correctamente.");
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo asignar el rol.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -95,6 +154,11 @@ public class PanelAdministrador extends javax.swing.JFrame {
         });
 
         btnAsignar.setText("Asignar Administrador");
+        btnAsignar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAsignarActionPerformed(evt);
+            }
+        });
 
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -166,33 +230,37 @@ public class PanelAdministrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        System.out.println("Contenido del archivo antes de eliminar:");
-        imprimirContenidoArchivo();
         int selectedRow = jTable1.getSelectedRow();
         if (selectedRow != -1) {
             String nombreUsuario = (String) jTable1.getValueAt(selectedRow, 1);
-            Usuario usuario = new Usuario(
-                (String) jTable1.getValueAt(selectedRow, 0),
-                nombreUsuario,
-                (String) jTable1.getValueAt(selectedRow, 2),
-                (String) jTable1.getValueAt(selectedRow, 3),
-                "", // La clave no se necesita para eliminar
-                (String) jTable1.getValueAt(selectedRow, 4),
-                "" // La fecha de nacimiento no se necesita para eliminar
+
+            // Confirmar eliminación
+            int confirm = JOptionPane.showConfirmDialog(
+                this,
+                "¿Está seguro de eliminar al usuario " + nombreUsuario + "?",
+                "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION
             );
-            try {
-                plataforma.eliminarUsuario(usuario);
-                // Actualizar la tabla
-                llenarTablaConUsuarios();
-                JOptionPane.showMessageDialog(this, "Usuario eliminado correctamente.");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Error al eliminar el usuario: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+            if (confirm == JOptionPane.YES_OPTION) {
+                try {
+                    // Agregar método para eliminar usuario en UsuarioDAO
+                    if (eliminarUsuario(nombreUsuario)) {
+                        // Actualizar la tabla
+                        cargarUsuariosEnTabla();
+                        JOptionPane.showMessageDialog(this, "Usuario eliminado correctamente.");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No se pudo eliminar el usuario.", 
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Error al eliminar el usuario: " + e.getMessage(),
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Debes seleccionar un usuario de la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione un usuario para eliminar.");
         }
-        System.out.println("Contenido del archivo después de eliminar:");
-        imprimirContenidoArchivo();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void imprimirContenidoArchivo() {
@@ -209,6 +277,36 @@ public class PanelAdministrador extends javax.swing.JFrame {
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         llenarTablaConUsuarios();
     }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarActionPerformed
+        // Verificar si hay una fila seleccionada
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this,
+                "Por favor, seleccione un usuario de la tabla.",
+                "Selección requerida",
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Obtener el nombre de usuario de la fila seleccionada
+        String nombreUsuario = (String) jTable1.getValueAt(selectedRow, 1);
+
+        // Asignar rol de administrador
+        if (UsuarioDAO.asignarRolAdministrador(nombreUsuario)) {
+            // Actualizar la tabla
+            cargarUsuariosEnTabla();
+            JOptionPane.showMessageDialog(this,
+                "Rol de administrador asignado correctamente.",
+                "Éxito",
+                JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this,
+                "No se pudo asignar el rol de administrador.",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAsignarActionPerformed
 
     /**
      * @param args the command line arguments
