@@ -241,9 +241,7 @@ public class GestionDeEventos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirMouseClicked
 
     private void btnEscogerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEscogerActionPerformed
-        SeleccionarAsientos pf = new SeleccionarAsientos();
-        pf.setVisible(true);
-        dispose();
+
     }//GEN-LAST:event_btnEscogerActionPerformed
     
     private void cmbEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEventosActionPerformed
