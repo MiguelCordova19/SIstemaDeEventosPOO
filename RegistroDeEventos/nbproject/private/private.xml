@@ -3,16 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/User/Documents/Sistema%20de%20Registro%20de%20Eventos%20POO/SistemaDeEventosPOO/RegistroDeEventos/src/Clases/Usuario.java</file>
-            <file>file:/C:/Users/User/Documents/Sistema%20de%20Registro%20de%20Eventos%20POO/SistemaDeEventosPOO/RegistroDeEventos/src/GUI/GestionDeEventos.java</file>
-            <file>file:/C:/Users/User/Documents/Sistema%20de%20Registro%20de%20Eventos%20POO/SistemaDeEventosPOO/RegistroDeEventos/src/Clases/Administrador.java</file>
-            <file>file:/C:/Users/User/Documents/Sistema%20de%20Registro%20de%20Eventos%20POO/SistemaDeEventosPOO/RegistroDeEventos/src/BaseDeDatos/UsuarioDAO.java</file>
-            <file>file:/C:/Users/User/Documents/Sistema%20de%20Registro%20de%20Eventos%20POO/SistemaDeEventosPOO/RegistroDeEventos/src/ConexionDB/SQLConexion.java</file>
-            <file>file:/C:/Users/User/Documents/Sistema%20de%20Registro%20de%20Eventos%20POO/SistemaDeEventosPOO/RegistroDeEventos/src/GUI/Login.java</file>
-            <file>file:/C:/Users/User/Documents/Sistema%20de%20Registro%20de%20Eventos%20POO/SistemaDeEventosPOO/RegistroDeEventos/src/ConexionDB/DatabaseManager.java</file>
-            <file>file:/C:/Users/User/Documents/Sistema%20de%20Registro%20de%20Eventos%20POO/SistemaDeEventosPOO/RegistroDeEventos/src/GUI/CrearCuenta.java</file>
-            <file>file:/C:/Users/User/Documents/Sistema%20de%20Registro%20de%20Eventos%20POO/SistemaDeEventosPOO/RegistroDeEventos/src/HashSet/AdministradorManager.java</file>
-            <file>file:/C:/Users/User/Documents/Sistema%20de%20Registro%20de%20Eventos%20POO/SistemaDeEventosPOO/RegistroDeEventos/src/GUI/PanelAdministrador.java</file>
+            <file>file:/C:/Users/puert/OneDrive/Documentos/POOPROYECTO/SistemaDeEventosPOO/RegistroDeEventos/src/Icons/Diseño%20sin%20título%20(1).png</file>
+            <file>file:/C:/Users/puert/OneDrive/Documentos/POOPROYECTO/SistemaDeEventosPOO/RegistroDeEventos/src/Icons/abstract-vertical-background-with-a-combination-of-light-blue-and-dark-blue-gradient-colors-free-vector.jpg</file>
+            <file>file:/C:/Users/puert/OneDrive/Documentos/POOPROYECTO/SistemaDeEventosPOO/RegistroDeEventos/src/Icons/Diseño%20sin%20título.png</file>
+            <file>file:/C:/Users/puert/OneDrive/Documentos/POOPROYECTO/SistemaDeEventosPOO/RegistroDeEventos/src/Icons/Registro%20de%20Evento.png</file>
+            <file>file:/C:/Users/puert/OneDrive/Documentos/POOPROYECTO/SistemaDeEventosPOO/RegistroDeEventos/src/GUI/SistemaPago.java</file>
         </group>
     </open-files>
 </project-private>
