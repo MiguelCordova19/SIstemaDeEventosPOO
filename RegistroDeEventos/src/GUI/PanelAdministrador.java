@@ -26,7 +26,7 @@ public class PanelAdministrador extends javax.swing.JFrame {
             DefaultTableModel modelo = new DefaultTableModel(
                 new Object[][] {},
                 new String[] {
-                    "Nombre", "Nombre de Usuario", "Correo", "Género", "Rol"
+                    "Nombre", "Nombre de Usuario", "Correo", "Género"
                 }
             ) {
                 @Override
@@ -61,7 +61,7 @@ public class PanelAdministrador extends javax.swing.JFrame {
         // Llenar la tabla con los usuarios
         for (Usuario usuario : usuarios) {
             ((DefaultTableModel) jTable1.getModel()).addRow(new Object[] {
-                usuario.getNombre(), usuario.getNombreUsuario(), usuario.getEmail(), usuario.getGenero(), "Nivel Usuario"
+                usuario.getNombre(), usuario.getNombreUsuario(), usuario.getEmail(), usuario.getGenero()
             });
         }
     }
@@ -91,7 +91,6 @@ public class PanelAdministrador extends javax.swing.JFrame {
                         usuario.getNombreUsuario(),
                         usuario.getEmail(),
                         usuario.getGenero(),
-                        "Usuario" // Rol por defecto
                     });
                 } catch (Exception e) {
                     System.err.println("Error al agregar fila: " + e.getMessage());
@@ -104,16 +103,6 @@ public class PanelAdministrador extends javax.swing.JFrame {
         }
     }
     
-    private void asignarRol(int idUsuario, int idRol) {
-        if (UsuarioDAO.asignarRolAUsuario(idUsuario, idRol)) {
-            // Actualizar la tabla de usuarios para reflejar el cambio de rol
-            cargarUsuariosEnTabla();
-            JOptionPane.showMessageDialog(this, "Rol asignado correctamente.");
-        } else {
-            JOptionPane.showMessageDialog(this, "No se pudo asignar el rol.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -123,7 +112,6 @@ public class PanelAdministrador extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnEliminar = new javax.swing.JButton();
-        btnAsignar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnCerrarSesion = new javax.swing.JButton();
@@ -135,13 +123,13 @@ public class PanelAdministrador extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Nombre", "Nombre de Usuario", "Correo", "Género", "Rol"
+                "Nombre", "Nombre de Usuario", "Correo", "Género"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -150,13 +138,6 @@ public class PanelAdministrador extends javax.swing.JFrame {
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
-            }
-        });
-
-        btnAsignar.setText("Asignar Administrador");
-        btnAsignar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAsignarActionPerformed(evt);
             }
         });
 
@@ -173,16 +154,14 @@ public class PanelAdministrador extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 918, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(251, 251, 251)
+                .addGap(342, 342, 342)
                 .addComponent(btnActualizar)
-                .addGap(41, 41, 41)
-                .addComponent(btnAsignar)
-                .addGap(50, 50, 50)
+                .addGap(60, 60, 60)
                 .addComponent(btnEliminar)
-                .addContainerGap(241, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,7 +170,6 @@ public class PanelAdministrador extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAsignar)
                     .addComponent(btnEliminar)
                     .addComponent(btnActualizar))
                 .addContainerGap(44, Short.MAX_VALUE))
@@ -278,36 +256,6 @@ public class PanelAdministrador extends javax.swing.JFrame {
         llenarTablaConUsuarios();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
-    private void btnAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarActionPerformed
-        // Verificar si hay una fila seleccionada
-        int selectedRow = jTable1.getSelectedRow();
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this,
-                "Por favor, seleccione un usuario de la tabla.",
-                "Selección requerida",
-                JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        // Obtener el nombre de usuario de la fila seleccionada
-        String nombreUsuario = (String) jTable1.getValueAt(selectedRow, 1);
-
-        // Asignar rol de administrador
-        if (UsuarioDAO.asignarRolAdministrador(nombreUsuario)) {
-            // Actualizar la tabla
-            cargarUsuariosEnTabla();
-            JOptionPane.showMessageDialog(this,
-                "Rol de administrador asignado correctamente.",
-                "Éxito",
-                JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(this,
-                "No se pudo asignar el rol de administrador.",
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_btnAsignarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -346,7 +294,6 @@ public class PanelAdministrador extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
     private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnAsignar;
     private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JLabel jLabel2;

@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AdministradorManager {
-    private static final String ARCHIVO_ADMINS = "administradores.txt";
     private Set<Administrador> administradores;
     private Plataforma plataforma;
     private static AdministradorManager instancia;
@@ -54,8 +53,6 @@ public class AdministradorManager {
     }
 
     public Set<Usuario> obtenerUsuarios() {
-        // Aquí debes implementar la lógica para obtener todos los usuarios
-        // desde el archivo de usuarios.txt
         return new HashSet<>();
     }
 
@@ -68,10 +65,8 @@ public class AdministradorManager {
     }
 
     private void guardarAdministradores() {
-        // Código para guardar administradores en el archivo
     }
 
     private void cargarAdministradores() {
-        // Código para cargar administradores desde el archivo
     }
 }

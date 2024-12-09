@@ -48,7 +48,7 @@ public class Evento {
         return descripcion;
     }
     
-    public double obtenerPrecio() {
+    public double getPrecio() {
         return this.precio;
     }
     

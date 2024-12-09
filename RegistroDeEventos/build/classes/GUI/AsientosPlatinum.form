@@ -44,7 +44,7 @@
     <Component class="javax.swing.JLabel" name="Silla1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Items/Asientos (1).png"/>
+          <Image iconType="3" name="/Icons/Asientos (1).png"/>
         </Property>
       </Properties>
       <Constraints>
@@ -56,7 +56,7 @@
     <Component class="javax.swing.JLabel" name="Silla2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Items/Asientos (1).png"/>
+          <Image iconType="3" name="/Icons/Asientos (1).png"/>
         </Property>
       </Properties>
       <Constraints>
@@ -68,7 +68,7 @@
     <Component class="javax.swing.JLabel" name="Silla3">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Items/Asientos (1).png"/>
+          <Image iconType="3" name="/Icons/Asientos (1).png"/>
         </Property>
       </Properties>
       <Constraints>
@@ -80,7 +80,7 @@
     <Component class="javax.swing.JLabel" name="Silla4">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Items/Asientos (1).png"/>
+          <Image iconType="3" name="/Icons/Asientos (1).png"/>
         </Property>
       </Properties>
       <Constraints>
@@ -92,7 +92,7 @@
     <Component class="javax.swing.JLabel" name="Silla5">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Items/Asientos (1).png"/>
+          <Image iconType="3" name="/Icons/Asientos (1).png"/>
         </Property>
       </Properties>
       <Constraints>
@@ -104,7 +104,7 @@
     <Component class="javax.swing.JLabel" name="Silla6">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Items/Asientos (1).png"/>
+          <Image iconType="3" name="/Icons/Asientos (1).png"/>
         </Property>
       </Properties>
       <Constraints>
@@ -116,7 +116,7 @@
     <Component class="javax.swing.JLabel" name="Silla7">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Items/Asientos (1).png"/>
+          <Image iconType="3" name="/Icons/Asientos (1).png"/>
         </Property>
       </Properties>
       <Constraints>
@@ -128,7 +128,7 @@
     <Component class="javax.swing.JLabel" name="Silla8">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Items/Asientos (1).png"/>
+          <Image iconType="3" name="/Icons/Asientos (1).png"/>
         </Property>
       </Properties>
       <Constraints>
@@ -140,7 +140,7 @@
     <Component class="javax.swing.JLabel" name="Silla9">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Items/Asientos (1).png"/>
+          <Image iconType="3" name="/Icons/Asientos (1).png"/>
         </Property>
       </Properties>
       <Constraints>
@@ -152,7 +152,7 @@
     <Component class="javax.swing.JLabel" name="Silla10">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Items/Asientos (1).png"/>
+          <Image iconType="3" name="/Icons/Asientos (1).png"/>
         </Property>
       </Properties>
       <Constraints>
@@ -164,7 +164,7 @@
     <Component class="javax.swing.JLabel" name="Silla11">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Items/Asientos (1).png"/>
+          <Image iconType="3" name="/Icons/Asientos (1).png"/>
         </Property>
       </Properties>
       <Constraints>
@@ -176,7 +176,7 @@
     <Component class="javax.swing.JLabel" name="Silla12">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Items/Asientos (1).png"/>
+          <Image iconType="3" name="/Icons/Asientos (1).png"/>
         </Property>
       </Properties>
       <Constraints>
@@ -188,7 +188,7 @@
     <Component class="javax.swing.JLabel" name="Silla13">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Items/Asientos (1).png"/>
+          <Image iconType="3" name="/Icons/Asientos (1).png"/>
         </Property>
       </Properties>
       <Constraints>
@@ -200,7 +200,7 @@
     <Component class="javax.swing.JLabel" name="Silla14">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Items/Asientos (1).png"/>
+          <Image iconType="3" name="/Icons/Asientos (1).png"/>
         </Property>
       </Properties>
       <Constraints>
@@ -212,7 +212,7 @@
     <Component class="javax.swing.JLabel" name="Silla15">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Items/Asientos (1).png"/>
+          <Image iconType="3" name="/Icons/Asientos (1).png"/>
         </Property>
       </Properties>
       <Constraints>
@@ -224,7 +224,7 @@
     <Component class="javax.swing.JLabel" name="Silla16">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Items/Asientos (1).png"/>
+          <Image iconType="3" name="/Icons/Asientos (1).png"/>
         </Property>
       </Properties>
       <Constraints>
@@ -236,7 +236,7 @@
     <Component class="javax.swing.JLabel" name="Silla17">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Items/Asientos (1).png"/>
+          <Image iconType="3" name="/Icons/Asientos (1).png"/>
         </Property>
       </Properties>
       <Constraints>
@@ -248,7 +248,7 @@
     <Component class="javax.swing.JLabel" name="Silla18">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Items/Asientos (1).png"/>
+          <Image iconType="3" name="/Icons/Asientos (1).png"/>
         </Property>
       </Properties>
       <Constraints>
@@ -263,7 +263,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="120" y="160" width="50" height="30"/>
+          <AbsoluteConstraints x="120" y="160" width="60" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -283,7 +283,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="40" y="166" width="50" height="20"/>
+          <AbsoluteConstraints x="40" y="166" width="60" height="20"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -293,7 +293,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="200" y="160" width="50" height="30"/>
+          <AbsoluteConstraints x="200" y="160" width="60" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -303,7 +303,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="280" y="160" width="50" height="30"/>
+          <AbsoluteConstraints x="280" y="160" width="60" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -313,7 +313,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="360" y="160" width="50" height="30"/>
+          <AbsoluteConstraints x="360" y="160" width="60" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -323,7 +323,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="440" y="160" width="50" height="30"/>
+          <AbsoluteConstraints x="440" y="160" width="60" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -333,7 +333,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="520" y="160" width="50" height="30"/>
+          <AbsoluteConstraints x="520" y="160" width="60" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -343,7 +343,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="600" y="160" width="50" height="30"/>
+          <AbsoluteConstraints x="600" y="160" width="60" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -353,7 +353,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="680" y="160" width="50" height="30"/>
+          <AbsoluteConstraints x="680" y="160" width="60" height="30"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -494,7 +494,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
+    <Component class="javax.swing.JTextField" name="txtCantidadAsientos">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="370" y="360" width="170" height="30"/>
@@ -524,22 +524,44 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Ir a Pagar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNextPagarActionPerformed"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="400" y="420" width="-1" height="40"/>
+          <AbsoluteConstraints x="270" y="420" width="-1" height="40"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btnAnular">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Regresar"/>
+        <Property name="text" type="java.lang.String" value="Anular"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnularActionPerformed"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="250" y="420" width="-1" height="40"/>
+          <AbsoluteConstraints x="140" y="420" width="-1" height="40"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnNiveles">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Seleccionar Otros Niveles"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNivelesActionPerformed"/>
+      </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="420" y="420" width="-1" height="40"/>
         </Constraint>
       </Constraints>
     </Component>

@@ -1,15 +1,22 @@
 package GUI;
         
+import Clases.AsientoSeleccionado;
 import Clases.Evento;
+import Clases.EventoManager;
+import Clases.EventoSeleccionado;
 import HashSet.EventoHashet;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 
 public class GestionDeEventos extends javax.swing.JFrame {
     private EventoHashet gestorEventos;
+    private EventoSeleccionado eventoSeleccionado;
+    private List<AsientoSeleccionado> asientosSeleccionados;
     
     int xMouse, yMouse;
     public GestionDeEventos() {
@@ -17,6 +24,8 @@ public class GestionDeEventos extends javax.swing.JFrame {
         gestorEventos = new EventoHashet();
         cargarEventosEnComboBox();
         configurarEventos();
+        eventoSeleccionado = null; // Inicializar eventoSeleccionado
+        asientosSeleccionados = new ArrayList<>();
     }
     
     private void cargarEventosEnComboBox() {
@@ -37,7 +46,7 @@ public class GestionDeEventos extends javax.swing.JFrame {
             if (eventoSeleccionado != null) {
                 // Actualizar todos los campos con la información del evento
                 jTextArea1.setText(eventoSeleccionado.getDescripcion());
-                txtPrecio.setText(String.format("%.2f", eventoSeleccionado.obtenerPrecio()));
+                txtPrecio.setText(String.format("%.2f", eventoSeleccionado.getPrecio()));
                 
                 // Nuevos campos
                 jTextField1.setText(eventoSeleccionado.getAmbiente());
@@ -59,7 +68,6 @@ public class GestionDeEventos extends javax.swing.JFrame {
     });
     }
     
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -241,11 +249,26 @@ public class GestionDeEventos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirMouseClicked
 
     private void btnEscogerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEscogerActionPerformed
-
+        if (eventoSeleccionado != null) {
+            SeleccionarAsientos seleccionarAsientos = new SeleccionarAsientos();
+            seleccionarAsientos.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un evento antes de continuar.");
+        }
     }//GEN-LAST:event_btnEscogerActionPerformed
     
     private void cmbEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEventosActionPerformed
-        // TODO add your handling code here:
+        String nombreSeleccionado = (String) cmbEventos.getSelectedItem();
+        Evento eventoSeleccionado = gestorEventos.buscarEventoPorNombre(nombreSeleccionado);
+
+        if (eventoSeleccionado != null) {
+            this.eventoSeleccionado = new EventoSeleccionado(); // Actualizar eventoSeleccionado
+            this.eventoSeleccionado.setNombre(eventoSeleccionado.getNombre());
+            this.eventoSeleccionado.setFecha(eventoSeleccionado.getFecha());
+            this.eventoSeleccionado.setPrecio(eventoSeleccionado.getPrecio());
+            EventoManager.setEventoSeleccionado(this.eventoSeleccionado);
+        }
     }//GEN-LAST:event_cmbEventosActionPerformed
 
     /**

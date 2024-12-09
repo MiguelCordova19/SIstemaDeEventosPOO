@@ -5,7 +5,7 @@ import Clases.Asiento;
 import Clases.Evento;
 import java.util.HashSet;
 import java.util.Set;
-
+import ConexionDB.DatabaseManager;
 
 public class EventoHashet {
      private static Set<Evento> listaEventos;
@@ -13,6 +13,59 @@ public class EventoHashet {
     public EventoHashet() {
         listaEventos = new HashSet<>();
         inicializarEventos();
+        crearTablaEventos();
+        insertarEventosEnBaseDeDatos();
+    }
+    
+    private void crearTablaEventos() {
+        String sqlCrearTabla = "CREATE TABLE IF NOT EXISTS eventos (" +
+            "id INT AUTO_INCREMENT PRIMARY KEY, " +
+            "nombre VARCHAR(255) NOT NULL, " +
+            "descripcion TEXT, " +
+            "precio DECIMAL(10,2), " +
+            "ambiente VARCHAR(100), " +
+            "capacidad INT, " +
+            "fecha VARCHAR(50), " +
+            "lugar VARCHAR(255), " +
+            "estado VARCHAR(50)" +
+            ")";
+
+        DatabaseManager.crearTabla(sqlCrearTabla);
+    }
+    
+    public void insertarEventosEnBaseDeDatos() {
+        String sqlInsert = "INSERT INTO eventos " +
+        "(nombre, descripcion, precio, ambiente, capacidad, fecha, lugar, estado) " +
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    
+        String sqlVerificar = "SELECT COUNT(*) FROM eventos WHERE nombre = ?";
+
+        for (Evento evento : listaEventos) {
+            // Primero verificamos si ya existe el evento
+            boolean existe = DatabaseManager.existeRegistro(sqlVerificar, evento.getNombre());
+
+            if (!existe) {
+                boolean insertado = DatabaseManager.insertarRegistro(
+                    sqlInsert, 
+                    evento.getNombre(), 
+                    evento.getDescripcion(), 
+                    evento.getPrecio(), 
+                    evento.getAmbiente(), 
+                    evento.getCapacidad(), 
+                    evento.getFecha(), 
+                    evento.getLugar(), 
+                    evento.getEstado()
+                );
+
+                if (insertado) {
+                    System.out.println("Evento insertado: " + evento.getNombre());
+                } else {
+                    System.out.println("Error al insertar evento: " + evento.getNombre());
+                }
+            } else {
+                System.out.println("Evento ya existe: " + evento.getNombre());
+            }
+        }
     }
     
     private void inicializarEventos() {

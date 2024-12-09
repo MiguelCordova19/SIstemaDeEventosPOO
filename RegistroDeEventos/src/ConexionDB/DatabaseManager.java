@@ -1,6 +1,7 @@
 
 package ConexionDB;
 
+import Clases.Evento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,5 +42,22 @@ public class DatabaseManager {
             System.err.println("Error en consulta: " + e.getMessage());
             return null;
         }
+    }
+    
+    public static boolean existeRegistro(String consulta, String parametro) {
+        try (Connection conn = SQLConexion.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(consulta)) {
+
+            pstmt.setString(1, parametro);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
