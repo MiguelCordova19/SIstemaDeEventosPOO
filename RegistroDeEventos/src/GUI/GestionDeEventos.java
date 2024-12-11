@@ -1,6 +1,7 @@
 package GUI;
         
 import Clases.AsientoSeleccionado;
+import Clases.Carrito;
 import Clases.Evento;
 import Clases.EventoManager;
 import Clases.EventoSeleccionado;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import GUI.SistemaPago;
 
 
 public class GestionDeEventos extends javax.swing.JFrame {
@@ -67,6 +70,7 @@ public class GestionDeEventos extends javax.swing.JFrame {
         }
     });
     }
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -250,7 +254,22 @@ public class GestionDeEventos extends javax.swing.JFrame {
 
     private void btnEscogerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEscogerActionPerformed
         if (eventoSeleccionado != null) {
+            // Pasar el evento seleccionado al Carrito antes de abrir SeleccionarAsientos
+            Carrito carrito = Carrito.getInstance();
+            carrito.agregarEvento(eventoSeleccionado.getNombre());
+
             SeleccionarAsientos seleccionarAsientos = new SeleccionarAsientos();
+
+            // Mostrar información de asientos previamente seleccionados si existen
+            List<AsientoSeleccionado> asientosAnteriores = 
+                Carrito.getInstance().getAsientosSeleccionados(eventoSeleccionado.getNombre());
+
+            if (!asientosAnteriores.isEmpty()) {
+                // Puedes mostrar un diálogo informativo o pasar la información a SeleccionarAsientos
+                String mensaje = "Tiene " + asientosAnteriores.size() + " asientos seleccionados previamente para este evento.";
+                JOptionPane.showMessageDialog(this, mensaje, "Asientos Previos", JOptionPane.INFORMATION_MESSAGE);
+            }
+
             seleccionarAsientos.setVisible(true);
             this.dispose();
         } else {

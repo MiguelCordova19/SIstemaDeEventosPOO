@@ -30,10 +30,20 @@ public class SeleccionarAsientos extends javax.swing.JFrame {
 
         btnGeneral.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         btnGeneral.setText("General");
+        btnGeneral.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGeneralActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnGeneral, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 580, 90));
 
         btnVip.setFont(new java.awt.Font("Segoe UI", 1, 34)); // NOI18N
         btnVip.setText("VIP");
+        btnVip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVipActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnVip, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, 500, 70));
 
         btnPlatinum.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
@@ -77,6 +87,18 @@ public class SeleccionarAsientos extends javax.swing.JFrame {
         gestionDeEventos.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnEventoActionPerformed
+
+    private void btnVipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVipActionPerformed
+        AsientosVIP asientosVIP = new AsientosVIP();
+        asientosVIP.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVipActionPerformed
+
+    private void btnGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneralActionPerformed
+        AsientosGeneral asientosGeneral = new AsientosGeneral();
+        asientosGeneral.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnGeneralActionPerformed
 
     /**
      * @param args the command line arguments

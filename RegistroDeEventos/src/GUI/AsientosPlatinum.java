@@ -17,46 +17,52 @@ public class AsientosPlatinum extends javax.swing.JFrame {
         configurarRestriccionesEntrada();
         configurarSeleccionAsientos();
     }
-    private boolean validarEntradaAsientos() {
+    private int[] validarEntradaAsientos() {
         String entradaAsientos = txtCantidadAsientos.getText().trim();
         int asientosSeleccionados = cmbAsientos.getSelectedIndex();
 
         // Verificar que se haya seleccionado una cantidad
         if (asientosSeleccionados == 0) {
             JOptionPane.showMessageDialog(this, "Por favor, seleccione la cantidad de asientos.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
+            return null;
         }
 
         // Si se seleccionaron 18 asientos, no es necesario validar la entrada
         if (asientosSeleccionados == cmbAsientos.getItemCount() - 1) {
-            return true;
+            int[] asientos = new int[18];
+            for (int i = 0; i < 18; i++) {
+                asientos[i] = i + 1;
+            }
+            return asientos;
         }
 
         // Validar formato de entrada para otros casos
         if (!entradaAsientos.matches("^\\d+(,\\d+)*$")) {
             JOptionPane.showMessageDialog(this, "Formato de asientos inválido. Use números separados por comas.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
+            return null;
         }
 
         // Dividir y validar números de asientos
-        String[] asientos = entradaAsientos.split(",");
+        String[] asientosStr = entradaAsientos.split(",");
+        int[] asientos = new int[asientosStr.length];
 
         // Verificar cantidad de asientos - CORRECCIÓN AQUÍ
-        if (asientos.length != asientosSeleccionados) {
+        if (asientosStr.length != asientosSeleccionados) {
             JOptionPane.showMessageDialog(this, "La cantidad de asientos no coincide con su selección.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
+            return null;
         }
 
         // Validar que cada asiento esté entre 1 y 18
-        for (String asiento : asientos) {
-            int numAsiento = Integer.parseInt(asiento);
+        for (int i = 0; i < asientosStr.length; i++) {
+            int numAsiento = Integer.parseInt(asientosStr[i]);
             if (numAsiento < 1 || numAsiento > 18) {
                 JOptionPane.showMessageDialog(this, "Solo se permiten asientos del 1 al 18.", "Error", JOptionPane.ERROR_MESSAGE);
-                return false;
+                return null;
             }
+            asientos[i] = numAsiento;
         }
 
-        return true;
+        return asientos;
     }
     
     private void configurarRestriccionesEntrada() {
@@ -97,6 +103,8 @@ public class AsientosPlatinum extends javax.swing.JFrame {
             }
         });
     }
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -313,15 +321,18 @@ public class AsientosPlatinum extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNextPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextPagarActionPerformed
-        if (validarEntradaAsientos()) {
-            String[] asientos = txtCantidadAsientos.getText().split(",");
-            for (String asiento : asientos) {
-                int numAsiento = Integer.parseInt(asiento);
-                sistemaPago.agregarAsientoSeleccionado(numAsiento, 100.0); // Precio fijo de 100.0 por ahora
+        int[] asientos = validarEntradaAsientos();
+        if (asientos != null) {
+            for (int numAsiento : asientos) {
+                String numAsientoStr = String.valueOf(numAsiento);
+                sistemaPago.agregarAsientoSeleccionado(numAsientoStr, 100.0, "Platinum");
             }
             sistemaPago.setVisible(true);
             this.dispose();
-        }
+        } else {
+            // Maneja el caso en que validarEntradaAsientos() devuelve null
+            JOptionPane.showMessageDialog(this, "No se han seleccionado asientos válidos.");
+        }       
     }//GEN-LAST:event_btnNextPagarActionPerformed
 
     private void btnNivelesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNivelesActionPerformed

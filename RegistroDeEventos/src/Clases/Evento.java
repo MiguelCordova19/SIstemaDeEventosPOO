@@ -14,14 +14,19 @@ public class Evento {
     private String fecha;
     private String lugar;
     private String estado;
-    private List<Asiento> asientosDisponibles;
+    private List<Asiento> asientos;
     
     // Constructor original para mantener compatibilidad con código existente
     public Evento(String nombre, String descripcion, double precio) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
-        this.asientosDisponibles = new ArrayList<>();
+        this.ambiente = ambiente;
+        this.capacidad = capacidad;
+        this.fecha = fecha;
+        this.lugar = lugar;
+        this.estado = estado;
+        this.asientos = new ArrayList<>();
     }
     
     // Nuevo constructor con todos los campos
@@ -36,7 +41,7 @@ public class Evento {
         this.fecha = fecha;
         this.lugar = lugar;
         this.estado = estado;
-        this.asientosDisponibles = new ArrayList<>();
+        this.asientos = new ArrayList<>();
     }
     
     // Getters originales
@@ -74,7 +79,7 @@ public class Evento {
     }
     
     public List<Asiento> getAsientosDisponibles() {
-        return asientosDisponibles;
+        return asientos;
     }
     
     // Setters
@@ -113,7 +118,15 @@ public class Evento {
     }
     
     public void agregarAsiento(Asiento asiento) {
-        asientosDisponibles.add(asiento);
+        if (asientos.size() < capacidad) {
+            asientos.add(asiento);
+        } else {
+            System.out.println("Capacidad máxima alcanzada para el evento " + nombre);
+        }
+    }
+    
+    public List<Asiento> getAsientos() {
+        return asientos;
     }
     
     // Métodos necesarios para HashSet

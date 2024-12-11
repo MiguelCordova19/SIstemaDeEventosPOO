@@ -46,7 +46,7 @@ public class DatabaseManager {
     
     public static boolean existeRegistro(String consulta, String parametro) {
         try (Connection conn = SQLConexion.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(consulta)) {
+            PreparedStatement pstmt = conn.prepareStatement(consulta)) {
 
             pstmt.setString(1, parametro);
             ResultSet rs = pstmt.executeQuery();

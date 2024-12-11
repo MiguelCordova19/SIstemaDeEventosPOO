@@ -162,13 +162,13 @@ public class EventoHashet {
         listaEventos.add(conferenciaVirtual);
         listaEventos.add(festivalMusica);
         
-        // Agregar algunos asientos a cada evento
-        for (Evento evento : listaEventos) {
-            char[] filas = {'A', 'B', 'C', 'D', 'E'};
-            for (char fila : filas) {
-                for (int num = 1; num <= 10; num++) {
-                    evento.agregarAsiento(new Asiento(String.format("%02d", num), false));
-                }
+    }
+    
+    private void agregarAsientosAlEvento(Evento evento, String claseAsiento) {
+        char[] filas = {'A', 'B', 'C', 'D', 'E'};
+        for (char fila : filas) {
+            for (int num = 1; num <= 10; num++) {
+                evento.agregarAsiento(new Asiento(String.format("%c%02d", fila, num), claseAsiento));
             }
         }
     }

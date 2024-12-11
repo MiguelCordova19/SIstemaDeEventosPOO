@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
 public class SQLConexion {
@@ -56,6 +58,35 @@ public class SQLConexion {
             }
         } catch (SQLException e) {
             System.err.println("Error de conexión: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    public static void insertCompra(int idUsuario, double montoTotal, String metodoPago, String estadoCompra) {
+        String sql = "INSERT INTO Compras (id_usuario, fecha_compra, monto_total, metodo_pago, estado_compra) VALUES (?, ?, ?, ?, ?)";
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            // Obtener la fecha actual
+            LocalDate fechaCompra = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String fechaCompraSqlFormat = fechaCompra.format(formatter);
+
+            stmt.setInt(1, idUsuario);
+            stmt.setString(2, fechaCompraSqlFormat);
+            stmt.setDouble(3, montoTotal);
+            stmt.setString(4, metodoPago);
+            stmt.setString(5, estadoCompra);
+            stmt.executeUpdate();
+
+            // Obtener el id_compra generado automáticamente
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int idCompra = generatedKeys.getInt(1);
+                    System.out.println("Compra registrada con id: " + idCompra);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al insertar la compra: " + e.getMessage());
             e.printStackTrace();
         }
     }

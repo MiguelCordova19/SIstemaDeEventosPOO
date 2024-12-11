@@ -1,15 +1,24 @@
 
 package Clases;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Asiento {
     private String numero;
     private boolean ocupado;
-    private boolean desocupar;
-    private String clase; // Nuevo campo para el tipo de clase
+    private String clase;
+    private static final Map<String, Double> PRECIOS_ASIENTOS = new HashMap<>();
 
-    public Asiento(String numero, boolean ocupado, String clase) { // Agrega el parámetro clase
+    static {
+        PRECIOS_ASIENTOS.put("Platinum", 100.0);
+        PRECIOS_ASIENTOS.put("VIP", 50.0);
+        PRECIOS_ASIENTOS.put("General", 25.0);
+    }
+    
+    public Asiento(String numero, String clase) { // Agrega el parámetro clase
         this.numero = numero;
-        this.ocupado = ocupado;
+        this.ocupado = false;
         this.clase = clase; // Inicializa el campo clase
     }
 
@@ -29,10 +38,14 @@ public class Asiento {
         return clase;
     }
 
+    public String getNumAsiento() {
+        return this.numero;
+    }
+    
     public void desocupar() {
         if (ocupado) {
             ocupado = false;
-            System.out.println("Asiento " + numero + " de clase " + clase + " desocupado."); // Agrega la clase
+            System.out.println("Asiento " + numero + " de clase " + clase + " desocupado."); 
         } else {
             System.out.println("El asiento ya estaba desocupado.");
         }
@@ -41,9 +54,13 @@ public class Asiento {
     public void ocupar() {
         if (!ocupado) {
             ocupado = true;
-            System.out.println("Asiento " + numero + " de clase " + clase + " ocupado."); // Agrega la clase
+            System.out.println("Asiento " + numero + " de clase " + clase + " ocupado.");
         } else {
             System.out.println("El asiento ya estaba ocupado.");
         }
+    }
+    
+    public double getPrecio() {
+        return PRECIOS_ASIENTOS.getOrDefault(this.clase, 0.0);
     }
 }
