@@ -77,26 +77,26 @@ public class SeleccionarAsientos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPlatinumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlatinumActionPerformed
-        AsientosPlatinum asientosPlatinum = new AsientosPlatinum();
-        asientosPlatinum.setVisible(true);
+        AsientosPlatinum G_asientosPlatinum = new AsientosPlatinum();
+        G_asientosPlatinum.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnPlatinumActionPerformed
 
     private void btnEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEventoActionPerformed
-        GestionDeEventos gestionDeEventos = new GestionDeEventos();
-        gestionDeEventos.setVisible(true);
+        GestionDeEventos G_gestionDeEventos = new GestionDeEventos();
+        G_gestionDeEventos.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnEventoActionPerformed
 
     private void btnVipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVipActionPerformed
-        AsientosVIP asientosVIP = new AsientosVIP();
-        asientosVIP.setVisible(true);
+        AsientosVIP G_asientosVIP = new AsientosVIP();
+        G_asientosVIP.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVipActionPerformed
 
     private void btnGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneralActionPerformed
-        AsientosGeneral asientosGeneral = new AsientosGeneral();
-        asientosGeneral.setVisible(true);
+        AsientosGeneral G_asientosGeneral = new AsientosGeneral();
+        G_asientosGeneral.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGeneralActionPerformed
 

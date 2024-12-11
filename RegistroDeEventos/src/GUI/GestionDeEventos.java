@@ -255,22 +255,21 @@ public class GestionDeEventos extends javax.swing.JFrame {
     private void btnEscogerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEscogerActionPerformed
         if (eventoSeleccionado != null) {
             // Pasar el evento seleccionado al Carrito antes de abrir SeleccionarAsientos
-            Carrito carrito = Carrito.getInstance();
-            carrito.agregarEvento(eventoSeleccionado.getNombre());
+            Carrito G_carrito = Carrito.getInstance();
+            G_carrito.agregarEvento(eventoSeleccionado.getNombre());
 
-            SeleccionarAsientos seleccionarAsientos = new SeleccionarAsientos();
+            SeleccionarAsientos G_seleccionarAsientos = new SeleccionarAsientos();
 
             // Mostrar información de asientos previamente seleccionados si existen
             List<AsientoSeleccionado> asientosAnteriores = 
                 Carrito.getInstance().getAsientosSeleccionados(eventoSeleccionado.getNombre());
 
             if (!asientosAnteriores.isEmpty()) {
-                // Puedes mostrar un diálogo informativo o pasar la información a SeleccionarAsientos
                 String mensaje = "Tiene " + asientosAnteriores.size() + " asientos seleccionados previamente para este evento.";
                 JOptionPane.showMessageDialog(this, mensaje, "Asientos Previos", JOptionPane.INFORMATION_MESSAGE);
             }
 
-            seleccionarAsientos.setVisible(true);
+            G_seleccionarAsientos.setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un evento antes de continuar.");

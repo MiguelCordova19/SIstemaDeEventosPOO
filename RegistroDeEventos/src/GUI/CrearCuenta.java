@@ -88,7 +88,6 @@ public class CrearCuenta extends javax.swing.JFrame {
     }
 
     private boolean isValidEmail(String email) {
-        // Implementar validación de correo electrónico
         return true;
     }
     
@@ -124,13 +123,11 @@ public class CrearCuenta extends javax.swing.JFrame {
                 maxDays = 30;
                 break;
             case "Febrero":
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(Calendar.YEAR, year);
-                calendar.set(Calendar.MONTH, Calendar.FEBRUARY);
-                calendar.set(Calendar.DAY_OF_MONTH, 1);
-                calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-                int daysInFebruary = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-                maxDays = daysInFebruary;
+                if (isLeapYear(year)) {
+                    maxDays = 29;
+                } else {
+                    maxDays = 28;
+                }
                 break;
             default:
                 maxDays = 31;
@@ -152,6 +149,10 @@ public class CrearCuenta extends javax.swing.JFrame {
             }
         }
     });
+    }
+    
+    private boolean isLeapYear(int year) {
+        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
     }
         
     private class YearSelectedListener implements ItemListener {

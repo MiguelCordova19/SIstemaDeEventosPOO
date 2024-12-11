@@ -91,11 +91,11 @@ public class SistemaPago extends javax.swing.JFrame implements TotalObserver{
     }
     
     public void agregarAsientoSeleccionado(String numAsiento, double precio, String tipo) {
-        int numAsientoInt = Integer.parseInt(numAsiento);
-        AsientoSeleccionado asiento = new AsientoSeleccionado(numAsientoInt, precio, tipo);
+        int G_numAsientoInt = Integer.parseInt(numAsiento);
+        AsientoSeleccionado asiento = new AsientoSeleccionado(G_numAsientoInt, precio, tipo);
 
         // Obtener el ID del evento seleccionado
-        String eventoId = txtEvento.getText(); // o cualquier otro identificador único que uses
+        String eventoId = txtEvento.getText();
 
         // Agregar asiento al carrito
         Carrito.getInstance().agregarAsiento(eventoId, asiento);
@@ -126,7 +126,7 @@ public class SistemaPago extends javax.swing.JFrame implements TotalObserver{
 
         double total = 0.0;
         for (AsientoSeleccionado asiento : asientosSeleccionados) {
-            total += asiento.getPrecio(); // Aquí asumimos que el precio ya es un double
+            total += asiento.getPrecio();
         }
         txtTotal.setText(String.format("%.2f", total));
     }
@@ -148,31 +148,19 @@ public class SistemaPago extends javax.swing.JFrame implements TotalObserver{
     }
     
     private void procesarPagoBcp() {
-        // Aquí debes agregar la lógica de procesamiento del pago a través de las billeteras móviles
-        // Puedes utilizar alguna API o servicio de pago en línea para procesar el pago
         JOptionPane.showMessageDialog(this, "Pago a través de BCP en proceso...");
-        // Agrega aquí el código para procesar el pago
     }
     
     private void procesarPagoBilletera() {
-        // Aquí debes agregar la lógica de procesamiento del pago a través de las billeteras móviles
-        // Puedes utilizar alguna API o servicio de pago en línea para procesar el pago
         JOptionPane.showMessageDialog(this, "Pago a través de billeteras móviles en proceso...");
-        // Agrega aquí el código para procesar el pago
     }
     
     private void procesarPagoTarjetas() {
-        // Aquí debes agregar la lógica de procesamiento del pago a través de las billeteras móviles
-        // Puedes utilizar alguna API o servicio de pago en línea para procesar el pago
         JOptionPane.showMessageDialog(this, "Pago a través de tarjetas en proceso...");
-        // Agrega aquí el código para procesar el pago
     }
     
     private void procesarPagoEfectivo() {
-        // Aquí debes agregar la lógica de procesamiento del pago a través de las billeteras móviles
-        // Puedes utilizar alguna API o servicio de pago en línea para procesar el pago
         JOptionPane.showMessageDialog(this, "Pago a través de PagoEfectivo en proceso...");
-        // Agrega aquí el código para procesar el pago
     }
 
     
@@ -363,16 +351,14 @@ public class SistemaPago extends javax.swing.JFrame implements TotalObserver{
     }//GEN-LAST:event_btnTotalActionPerformed
    
     private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
-        // Aquí deberías llamar al método que actualiza el total
+
         actualizarTotal();
     }//GEN-LAST:event_txtTotalActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        this.dispose();  // Cierra el frame actual
-
-        // Crea y muestra el frame de GestionDeEventos
-        GestionDeEventos gestionDeEventos = new GestionDeEventos();
-        gestionDeEventos.setVisible(true);
+        this.dispose();  
+        GestionDeEventos G_gestionDeEventos = new GestionDeEventos();
+        G_gestionDeEventos.setVisible(true);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed

@@ -175,9 +175,9 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_encabezadoMousePressed
 
     private void encabezadoMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_encabezadoMouseDragged
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-        this.setLocation(x - xMouse, y - yMouse);
+        int G_x = evt.getXOnScreen();
+        int G_y = evt.getYOnScreen();
+        this.setLocation(G_x - xMouse, G_y - yMouse);
     }//GEN-LAST:event_encabezadoMouseDragged
 
     private void exitTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitTxtMouseClicked
@@ -251,8 +251,8 @@ public class Login extends javax.swing.JFrame {
         }
 
         // Cargar el usuario y verificar credenciales
-        Usuario usuario = Usuario.cargarUsuario(nombreUsuario);
-        if (usuario != null && usuario.autenticar(password)) {
+        Usuario G_usuario = Usuario.cargarUsuario(nombreUsuario);
+        if (G_usuario != null && G_usuario.autenticar(password)) {
             GestionDeEventos pf = new GestionDeEventos();
             pf.setVisible(true);
             this.dispose();
@@ -269,8 +269,8 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void lbCrearCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCrearCuentaMouseClicked
-        CrearCuenta crearCuenta = new CrearCuenta();
-        crearCuenta.setVisible(true);
+        CrearCuenta G_crearCuenta = new CrearCuenta();
+        G_crearCuenta.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbCrearCuentaMouseClicked
 
